@@ -23,4 +23,5 @@ USER coder
 WORKDIR /home/coder/workspace
 
 # 4. 核心启动命令：读取环境变量修改密码 -> 启动 SSH -> 使用 exec 启动 code-server 接收系统信号
+ENTRYPOINT []
 CMD ["/bin/bash", "-c", "echo \"coder:${SSH_PASSWORD:-coder123}\" | sudo chpasswd && sudo service ssh start && exec code-server --bind-addr 0.0.0.0:8080 /home/coder/workspace"]
