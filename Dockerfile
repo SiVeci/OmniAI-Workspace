@@ -36,7 +36,8 @@ RUN mkdir -p /var/run/sshd && \
 
 # 6. 安装 Claude CLI & Gemini CLI
 RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
-
+# 确保 coder 用户对自己的家目录拥有绝对控制权
+RUN chown -R coder:coder /home/coder && chmod -R 755 /home/coder
 # 切回普通开发用户
 USER coder
 WORKDIR /home/coder/workspace
