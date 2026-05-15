@@ -22,5 +22,5 @@ RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
 USER coder
 WORKDIR /home/coder/workspace
 
-# 4. 核心启动命令：读取环境变量修改密码 -> 启动 SSH -> 启动 code-server
-CMD sudo sh -c "echo \"coder:${SSH_PASSWORD:-coder123}\" | chpasswd" && sudo service ssh start && code-server --bind-addr 0.0.0.0:8080 /home/coder/workspace
+# 4. 核心启动命令：读取环境变量修改密码 -> 启动 SSH -> 使用 exec 启动 code-server 接收系统信号
+CMD ["/bin/bash", "-c", "echo \"coder:${SSH_PASSWORD:-coder123}\" | sudo chpasswd && sudo service ssh start && exec code-server --bind-addr 0.0.0.0:8080 /home/coder/workspace"]
