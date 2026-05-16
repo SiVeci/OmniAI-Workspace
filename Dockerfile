@@ -34,8 +34,8 @@ RUN mkdir -p /var/run/sshd && \
     echo 'coder:coder123' | chpasswd && \
     echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# 6. 安装 Claude CLI & Gemini CLI
-RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
+# 6. 安装 Claude CLI & Gemini CLI & DeepSeek TUI
+RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli deepseek-tui
 # 确保 coder 用户对自己的家目录拥有绝对控制权
 RUN chown -R coder:coder /home/coder && chmod -R 755 /home/coder
 # 切回普通开发用户
